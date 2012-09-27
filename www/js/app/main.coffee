@@ -10,5 +10,5 @@
 #  Public License Version 2.1 (LGPL).  See LICENSE.txt for details.
 ###
 
-define [], ->
+define ['domReady!'], ->
   console.log('Hello world!')

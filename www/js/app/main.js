@@ -15,7 +15,7 @@
 
 (function() {
 
-  define([], function() {
+  define(['domReady!'], function() {
     return console.log('Hello world!');
   });
 
