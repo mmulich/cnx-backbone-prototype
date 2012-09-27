@@ -7,6 +7,13 @@ requirejs.config({
     baseUrl: 'js/lib',
     paths: {
         app: '../app'
+    },
+    // More info about shim @ http://requirejs.org/docs/api.html#config-shim
+    shim: {
+        'backbone': {
+            deps: ['underscore', 'jquery'],
+            exports: 'Backbone',
+        },
     }
 });
 
