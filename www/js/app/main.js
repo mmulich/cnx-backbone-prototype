@@ -15,8 +15,6 @@
 
 (function() {
 
-  define(['domReady!'], function() {
-    return console.log('Hello world!');
-  });
+  define(['app/models', 'domReady!'], function(models) {});
 
 }).call(this);
