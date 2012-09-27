@@ -14,7 +14,51 @@
 
 
 (function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['app/models', 'domReady!'], function(models) {});
+  define(['backbone', 'app/models', 'domReady!'], function(Backbone, models) {
+    /*
+      # A singleton for routing to our views based on path location.
+    */
+
+    var AppRouter, app;
+    AppRouter = (function(_super) {
+
+      __extends(AppRouter, _super);
+
+      function AppRouter() {
+        return AppRouter.__super__.constructor.apply(this, arguments);
+      }
+
+      AppRouter.prototype.initialize = function() {
+        return Backbone.history.start({
+          pushState: true
+        });
+      };
+
+      AppRouter.prototype.routes = {
+        '': 'casa',
+        'module/:id/edit': 'edit'
+      };
+
+      /*
+          # Route handlers
+      */
+
+
+      AppRouter.prototype.casa = function() {
+        return console.log("Home again!");
+      };
+
+      AppRouter.prototype.edit = function(id) {
+        return console.log("Time to write some copy for the " + id + " module");
+      };
+
+      return AppRouter;
+
+    })(Backbone.Router);
+    return app = new AppRouter();
+  });
 
 }).call(this);
