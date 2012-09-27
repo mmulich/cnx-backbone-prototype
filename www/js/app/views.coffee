@@ -46,14 +46,23 @@ define ['jquery', 'underscore', 'backbone', 'bootstrap'], ($, _, Backbone) ->
             </li>
           </ul></li>')
         .appendTo('[role=hud] ul.nav')
-        .find('.dropdown-toggle')
-        .dropdown()
+        .find('.dropdown-toggle').dropdown()
       # If the content isn't already on the page
-      #   (from a previous module view state perhaps), then initialize
-      #   the content into the page from the model
-      # Initialize the Aloha Editor over the content
+      #   (from a previous module view state, perhaps because we loaded
+      #   the generic module view before the edit view?),
+      #   then initialize the content into the page from the model
+      $("<div class=\"row-fluid\">
+           <div class=\"span12\">
+             <textarea class=\"editable-content\" name=\"content\">#{@model.get('content')}</textarea>
+           </div>
+         </div>")
+        .appendTo('[role=main]')
+        # Initialize the Aloha Editor over the content
+        ##.find('.editable-content').aloha()
       # Populate the Module's help area with super helpful text!
       # Initialize the edit action buttons (e.g. save and cancel).
+      $('<div><button type="submit" name="save" class="btn btn-primary">Save</button><button type="button" name="cancel" class="btn">Cancel</button>')
+        .appendTo('[role=main]')
       return @
 
 

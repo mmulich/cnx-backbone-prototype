@@ -71,6 +71,8 @@
                  data-target="#metadata-modal">Metadata</a>\
             </li>\
           </ul></li>').appendTo('[role=hud] ul.nav').find('.dropdown-toggle').dropdown();
+        $("<div class=\"row-fluid\">           <div class=\"span12\">             <textarea class=\"editable-content\" name=\"content\">" + (this.model.get('content')) + "</textarea>           </div>         </div>").appendTo('[role=main]');
+        $('<div><button type="submit" name="save" class="btn btn-primary">Save</button><button type="button" name="cancel" class="btn">Cancel</button>').appendTo('[role=main]');
         return this;
       };
 

@@ -28,7 +28,7 @@ define ['backbone', 'app/views', 'app/models', 'domReady!'], (Backbone, views, m
       console.log("Home again!")
     edit: (id) ->
       console.log("Time to write some copy for the #{id} module")
-      module = new models.Module(title: 'Kanban Boards')
+      module = new models.Module(title: 'Kanban Boards', content: '<h1>Kanban boards are cool<h1>')
       view = new views.EditModule(model: module)
 
   app = new AppRouter()

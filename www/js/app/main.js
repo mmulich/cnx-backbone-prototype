@@ -55,7 +55,8 @@
         var module, view;
         console.log("Time to write some copy for the " + id + " module");
         module = new models.Module({
-          title: 'Kanban Boards'
+          title: 'Kanban Boards',
+          content: '<h1>Kanban boards are cool<h1>'
         });
         return view = new views.EditModule({
           model: module
