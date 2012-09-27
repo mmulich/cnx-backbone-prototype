@@ -17,7 +17,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['backbone', 'app/models', 'domReady!'], function(Backbone, models) {
+  define(['backbone', 'app/views', 'app/models', 'domReady!'], function(Backbone, views, models) {
     /*
         A singleton for routing to our views based on path location.
     */
@@ -52,7 +52,14 @@
       };
 
       AppRouter.prototype.edit = function(id) {
-        return console.log("Time to write some copy for the " + id + " module");
+        var module, view;
+        console.log("Time to write some copy for the " + id + " module");
+        module = new models.Module({
+          title: 'Kanban Boards'
+        });
+        return view = new views.EditModule({
+          model: module
+        });
       };
 
       return AppRouter;

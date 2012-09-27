@@ -10,7 +10,7 @@
   Public License Version 2.1 (LGPL).  See LICENSE.txt for details.
 ###
 
-define ['backbone', 'app/models', 'domReady!'], (Backbone, models) ->
+define ['backbone', 'app/views', 'app/models', 'domReady!'], (Backbone, views, models) ->
 
   ###
     A singleton for routing to our views based on path location.
@@ -28,5 +28,7 @@ define ['backbone', 'app/models', 'domReady!'], (Backbone, models) ->
       console.log("Home again!")
     edit: (id) ->
       console.log("Time to write some copy for the #{id} module")
+      module = new models.Module(title: 'Kanban Boards')
+      view = new views.EditModule(model: module)
 
   app = new AppRouter()
