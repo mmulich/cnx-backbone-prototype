@@ -17,8 +17,12 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['jquery', 'underscore', 'backbone', 'bootstrap'], function($, _, Backbone) {
-    var Casa, EditModule, ToolsActionsViewlet, exports;
+  define(['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tools-viewlet.html', 'bootstrap'], function($, _, Backbone, Mustache, tools_viewlet) {
+    /*
+        View - top level views that work on the body element.
+    */
+
+    var Casa, EditModule, ToolsViewlet, exports;
     Casa = (function(_super) {
 
       __extends(Casa, _super);
@@ -57,20 +61,9 @@
       };
 
       EditModule.prototype.render = function() {
-        $('<li class="dropdown">\
-          <a id="tools-selection" class="dropdown-toggle" role="button">Tools<b class="caret"></b></a>\
-          <ul class="dropdown-menu" role="menu">\
-            <li><a tabindex="-1" href="#">Import</a></li>\
-            <li><a tabindex="-1" href="#">Preview ...</a></li>\
-            <li><a tabindex="-1" href="#">Publish</a></li>\
-            <li><a tabindex="-1" href="#">Sharing and Access Management</a></li>\
-            <li>\
-              <a tabindex="-1" href="#metadata-modal"\
-                 id="metadata-link"\
-                 data-toggle="modal"\
-                 data-target="#metadata-modal">Metadata</a>\
-            </li>\
-          </ul></li>').appendTo('[role=hud] ul.nav').find('.dropdown-toggle').dropdown();
+        var tools;
+        tools = new ToolsViewlet();
+        tools.$el.appendTo('[role=hud] ul.nav').find('.dropdown-toggle').dropdown();
         $("<div class=\"row-fluid\">           <div class=\"span12\">             <textarea class=\"editable-content\" name=\"content\">" + (this.model.get('content')) + "</textarea>           </div>         </div>").appendTo('[role=main]');
         $('<div><button type="submit" name="save" class="btn btn-primary">Save</button><button type="button" name="cancel" class="btn">Cancel</button>').appendTo('[role=main]');
         return this;
@@ -80,30 +73,28 @@
 
     })(Backbone.View);
     /*
-        Viewlets
+        Viewlets - Small chunks of view code used by top level views.
     */
 
-    ToolsActionsViewlet = (function(_super) {
+    ToolsViewlet = (function(_super) {
 
-      __extends(ToolsActionsViewlet, _super);
+      __extends(ToolsViewlet, _super);
 
-      function ToolsActionsViewlet() {
-        return ToolsActionsViewlet.__super__.constructor.apply(this, arguments);
+      function ToolsViewlet() {
+        return ToolsViewlet.__super__.constructor.apply(this, arguments);
       }
 
-      ToolsActionsViewlet.prototype.initialize = function() {
+      ToolsViewlet.prototype.initialize = function() {
         _.bindAll(this);
-        if (!(this.el != null)) {
-          throw new Error("An element must be defined, otherwise we don't know where to put the contents of the viewlet.");
-        }
         return this.render();
       };
 
-      ToolsActionsViewlet.prototype.render = function() {
+      ToolsViewlet.prototype.render = function() {
+        this.setElement($(tools_viewlet));
         return this;
       };
 
-      return ToolsActionsViewlet;
+      return ToolsViewlet;
 
     })(Backbone.View);
     exports = {

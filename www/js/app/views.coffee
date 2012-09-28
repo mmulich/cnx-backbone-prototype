@@ -10,7 +10,11 @@
   Public License Version 2.1 (LGPL).  See LICENSE.txt for details.
 ###
 
-define ['jquery', 'underscore', 'backbone', 'bootstrap'], ($, _, Backbone) ->
+define ['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tools-viewlet.html', 'bootstrap'], ($, _, Backbone, Mustache, tools_viewlet) ->
+
+  ###
+    View - top level views that work on the body element.
+  ###
 
   class Casa extends Backbone.View
     el: $('body')
@@ -31,20 +35,22 @@ define ['jquery', 'underscore', 'backbone', 'bootstrap'], ($, _, Backbone) ->
       @render()
     render: ->
       # Render the Tools Viewlet into the navigation area.
-      $('<li class="dropdown">
-          <a id="tools-selection" class="dropdown-toggle" role="button">Tools<b class="caret"></b></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a tabindex="-1" href="#">Import</a></li>
-            <li><a tabindex="-1" href="#">Preview ...</a></li>
-            <li><a tabindex="-1" href="#">Publish</a></li>
-            <li><a tabindex="-1" href="#">Sharing and Access Management</a></li>
-            <li>
-              <a tabindex="-1" href="#metadata-modal"
-                 id="metadata-link"
-                 data-toggle="modal"
-                 data-target="#metadata-modal">Metadata</a>
-            </li>
-          </ul></li>')
+      # $('<li class="dropdown">
+      #     <a id="tools-selection" class="dropdown-toggle" role="button">Tools<b class="caret"></b></a>
+      #     <ul class="dropdown-menu" role="menu">
+      #       <li><a tabindex="-1" href="#">Import</a></li>
+      #       <li><a tabindex="-1" href="#">Preview ...</a></li>
+      #       <li><a tabindex="-1" href="#">Publish</a></li>
+      #       <li><a tabindex="-1" href="#">Sharing and Access Management</a></li>
+      #       <li>
+      #         <a tabindex="-1" href="#metadata-modal"
+      #            id="metadata-link"
+      #            data-toggle="modal"
+      #            data-target="#metadata-modal">Metadata</a>
+      #       </li>
+      #     </ul></li>')
+      tools = new ToolsViewlet()
+      tools.$el
         .appendTo('[role=hud] ul.nav')
         .find('.dropdown-toggle').dropdown()
       # If the content isn't already on the page
@@ -67,19 +73,16 @@ define ['jquery', 'underscore', 'backbone', 'bootstrap'], ($, _, Backbone) ->
 
 
   ###
-    Viewlets
+    Viewlets - Small chunks of view code used by top level views.
   ###
 
-  class ToolsActionsViewlet extends Backbone.View
+  class ToolsViewlet extends Backbone.View
     initialize: ->
       _.bindAll(@)
-      if not @el?
-        throw new Error("An element must be defined, otherwise we don't know where to put the contents of the viewlet.")
       @render()
     render: ->
+      @setElement($(tools_viewlet))
       return @
-
-
 
   exports =
     Casa: Casa

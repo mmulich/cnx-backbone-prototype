@@ -46,6 +46,9 @@ acquired and placed in this package.
                ( http://underscorejs.org ).
 :BackboneJS: Downloaded directly from the BackboneJS project site
              ( http://backbonejs.org ).
+:text: Used a previously volo fetch version.
+:mustache: Downloaded directly from the latest tag in the project
+           ( https://github.com/janl/mustache.js ).
 
 Legal Stuff
 -----------
