@@ -110,9 +110,10 @@ define ['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tool
       'click .close': 'close'
     render: ->
       @setElement($(metadata_modal))
+      @$el.appendTo(document.body).modal(show: false)
       return @
     show: ->
-      $(document.body).append(@el)
+      @$el.modal('toggle')
       return @
     close: ->
       @remove()

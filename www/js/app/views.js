@@ -140,11 +140,14 @@
 
       MetadataModal.prototype.render = function() {
         this.setElement($(metadata_modal));
+        this.$el.appendTo(document.body).modal({
+          show: false
+        });
         return this;
       };
 
       MetadataModal.prototype.show = function() {
-        $(document.body).append(this.el);
+        this.$el.modal('toggle');
         return this;
       };
 
