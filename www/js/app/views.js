@@ -99,8 +99,17 @@
       };
 
       ToolsViewlet.prototype.metadata = function() {
+        /*
+                XXX Ideally we also want to push state
+                    (e.g. /module/d2a5c1/edit/metadata) and have the router handle
+                    the view initialization. This gets tricky because we want the
+                    edit view to render first. I think what we are looking for is a
+                    SubRouter implementation, which does not exist in the base
+                    Backbone library. This would also allow us to pass the model into
+                    subviews (aka modals) without looking up the object each time.
+        */
+
         var view;
-        console.log('metadata hit');
         view = new MetadataModal();
         return view.show();
       };
