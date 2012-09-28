@@ -17,12 +17,12 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tools-viewlet.html', 'bootstrap'], function($, _, Backbone, Mustache, tools_viewlet) {
+  define(['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tools-viewlet.html', 'text!app/templates/metadata-modal.html', 'bootstrap'], function($, _, Backbone, Mustache, tools_viewlet, metadata_modal) {
     /*
         View - top level views that work on the body element.
     */
 
-    var Casa, EditModule, ToolsViewlet, exports;
+    var Casa, EditModule, MetadataModal, ToolsViewlet, exports;
     Casa = (function(_super) {
 
       __extends(Casa, _super);
@@ -89,12 +89,61 @@
         return this.render();
       };
 
+      ToolsViewlet.prototype.events = {
+        'click .dropdown-menu li:eq(4)': 'metadata'
+      };
+
       ToolsViewlet.prototype.render = function() {
         this.setElement($(tools_viewlet));
         return this;
       };
 
+      ToolsViewlet.prototype.metadata = function() {
+        var view;
+        console.log('metadata hit');
+        view = new MetadataModal();
+        return view.show();
+      };
+
       return ToolsViewlet;
+
+    })(Backbone.View);
+    /*
+        ModalViews
+    */
+
+    MetadataModal = (function(_super) {
+
+      __extends(MetadataModal, _super);
+
+      function MetadataModal() {
+        return MetadataModal.__super__.constructor.apply(this, arguments);
+      }
+
+      MetadataModal.prototype.initialize = function() {
+        _.bindAll(this);
+        return this.render();
+      };
+
+      MetadataModal.prototype.events = {
+        'click .close': 'close'
+      };
+
+      MetadataModal.prototype.render = function() {
+        this.setElement($(metadata_modal));
+        return this;
+      };
+
+      MetadataModal.prototype.show = function() {
+        $(document.body).append(this.el);
+        return this;
+      };
+
+      MetadataModal.prototype.close = function() {
+        return this.remove();
+      };
+
+      return MetadataModal;
 
     })(Backbone.View);
     exports = {

@@ -10,7 +10,7 @@
   Public License Version 2.1 (LGPL).  See LICENSE.txt for details.
 ###
 
-define ['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tools-viewlet.html', 'bootstrap'], ($, _, Backbone, Mustache, tools_viewlet) ->
+define ['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tools-viewlet.html', 'text!app/templates/metadata-modal.html', 'bootstrap'], ($, _, Backbone, Mustache, tools_viewlet, metadata_modal) ->
 
   ###
     View - top level views that work on the body element.
@@ -80,9 +80,34 @@ define ['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tool
     initialize: ->
       _.bindAll(@)
       @render()
+    events:
+      'click .dropdown-menu li:eq(4)': 'metadata'
     render: ->
       @setElement($(tools_viewlet))
       return @
+    metadata: ->
+      console.log('metadata hit')
+      view = new MetadataModal()
+      view.show()
+
+  ###
+    ModalViews
+  ###
+
+  class MetadataModal extends Backbone.View
+    initialize: ->
+      _.bindAll(@)
+      @render()
+    events:
+      'click .close': 'close'
+    render: ->
+      @setElement($(metadata_modal))
+      return @
+    show: ->
+      $(document.body).append(@el)
+      return @
+    close: ->
+      @remove()
 
   exports =
     Casa: Casa
