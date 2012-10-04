@@ -17,12 +17,12 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(['backbone', 'app/views', 'app/models', 'domReady!'], function(Backbone, views, models) {
+  define(['backbone', 'underscore', 'app/views', 'app/models', 'domReady!'], function(Backbone, _, views, models) {
     /*
         A singleton for routing to our views based on path location.
     */
 
-    var AppRouter, app;
+    var AppRouter;
     AppRouter = (function(_super) {
 
       __extends(AppRouter, _super);
@@ -32,6 +32,7 @@
       }
 
       AppRouter.prototype.initialize = function() {
+        _.bindAll(this);
         return Backbone.history.start({
           pushState: true
         });

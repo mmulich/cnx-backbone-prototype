@@ -10,13 +10,14 @@
   Public License Version 2.1 (LGPL).  See LICENSE.txt for details.
 ###
 
-define ['backbone', 'app/views', 'app/models', 'domReady!'], (Backbone, views, models) ->
+define ['backbone', 'underscore', 'app/views', 'app/models', 'domReady!'], (Backbone, _, views, models) ->
 
   ###
     A singleton for routing to our views based on path location.
   ###
   class AppRouter extends Backbone.Router
     initialize: ->
+      _.bindAll(@)
       Backbone.history.start(pushState: true)
     routes:
       '': 'casa'
