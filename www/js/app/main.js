@@ -40,7 +40,8 @@
 
       AppRouter.prototype.routes = {
         '': 'casa',
-        'module/:id/edit': 'edit'
+        'module/:id/edit': 'edit',
+        'module/:id/edit/metadata': 'edit_metadata'
       };
 
       /*
@@ -64,10 +65,22 @@
         });
       };
 
+      AppRouter.prototype.edit_metadata = function(id) {
+        var module, view;
+        console.log("Edit some metadata. Woohoo!");
+        module = new models.Module({
+          title: 'If I had a hammer',
+          content: '<p>I would hammer every day and every night</p>'
+        });
+        return view = new views.EditModuleMetadata({
+          model: module
+        });
+      };
+
       return AppRouter;
 
     })(Backbone.Router);
-    return app = new AppRouter();
+    return window.app = new AppRouter();
   });
 
 }).call(this);

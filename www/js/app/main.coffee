@@ -22,6 +22,7 @@ define ['backbone', 'underscore', 'app/views', 'app/models', 'domReady!'], (Back
     routes:
       '': 'casa'
       'module/:id/edit': 'edit'
+      'module/:id/edit/metadata': 'edit_metadata'
     ###
       Route handlers
     ###
@@ -31,5 +32,10 @@ define ['backbone', 'underscore', 'app/views', 'app/models', 'domReady!'], (Back
       console.log("Time to write some copy for the #{id} module")
       module = new models.Module(title: 'Kanban Boards', content: '<h1>Kanban boards are cool<h1>')
       view = new views.EditModule(model: module)
+    edit_metadata: (id) ->
+      console.log("Edit some metadata. Woohoo!")
+      # XXX Module information would be retrieved from somewhere.
+      module = new models.Module(title: 'If I had a hammer', content: '<p>I would hammer every day and every night</p>')
+      view = new views.EditModuleMetadata(model: module)
 
-  app = new AppRouter()
+  window.app = new AppRouter()

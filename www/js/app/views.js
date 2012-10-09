@@ -108,10 +108,7 @@
                     Backbone library. This would also allow us to pass the model into
                     subviews (aka modals) without looking up the object each time.
         */
-
-        var view;
-        view = new MetadataModal();
-        return view.show();
+        return Backbone.history.navigate("module/1a2b3c/edit/metadata", true);
       };
 
       return ToolsViewlet;

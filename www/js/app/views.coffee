@@ -95,8 +95,9 @@ define ['jquery', 'underscore', 'backbone', 'mustache', 'text!app/templates/tool
             Backbone library. This would also allow us to pass the model into
             subviews (aka modals) without looking up the object each time.
       ###
-      view = new MetadataModal()
-      view.show()
+      Backbone.history.navigate("module/1a2b3c/edit/metadata", true)
+      # view = new MetadataModal()
+      # view.show()
 
   ###
     ModalViews
